@@ -1,39 +1,40 @@
-<div class="container-fluid">
-    <h1 class="h3 mb-4 text-gray-800">
-        <?php echo $judul; ?>
-    </h1>
-    <div class="row justify-content-center">
-        <div class="col md-8">
-            <div class="card">
-                <div class="card-header justify-content-center">
-                    Form Tambah Data Kantin
-                </div>
-                <div class="card-body">
-                    <form action="" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="nama">Nama Kantin</label>
-                            <input type="text" name="nama" value="<?= set_value('nama'); ?>" class="form-control" id="nama" placeholder="Nama Kantin">
-                            <?= form_error('nama', '<small class="text-danger pl-3">','</small>'); ?>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="text" name="email" value="<?= set_value('email'); ?>" class="form-control" id="email" placeholder="Email">
-                            <?= form_error('email', '<small class="text-danger pl-3">','</small>'); ?>
-                        </div>
-                        <div class="form-group">
-                            <label for="gambar">Gambar</label>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="gambar" id="gambar">
-                                <label for="gambar" class="custom-file-label">Choose File</label>
-                            </div>
-                        </div>
-                        <div class="form-group mt-3">
-                            <a href="<?= base_url('index.php/') ?>Kantin/" class="btn btn-danger">Tutup</a>
-                            <button type="submit" name="tambah" class="btn btn-primary float-right">Tambah Kantin</button>
-                        </div>
-                    </form>
+<main>
+    <div class="container-fluid">
+        <h1 class="h3 mb-4 text-gray-800">
+            <?php echo $judul; ?>
+        </h1>
+        <div class="row">
+            <div class="col-md-12"><a href="<?= base_url('index.php/') ?>Kantin" class="btn btn-info mb-2">Tutup</a>
+                <div class="col-md-12">
+                    <?= $this->session->flashdata('message'); ?>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>No</td>
+                                <td>Nama</td>
+                                <td>Email</td>
+                                <td>Gambar</td>
+                                <td>Aksi</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $i = 1; ?>
+                            <?php foreach ($customer as $us): ?>
+                                <tr>
+                                    <td><?= $i; ?></td>
+                                    <td><?= $us['nama']; ?></td>
+                                    <td><?= $us['email']; ?></td>
+                                    <td><img src="<?= base_url('assets/assets/img/profile/') . $us['gambar']; ?>" style="width: 100px; height: 100px;" class="img-thumbnail"></td>
+                                    <td>
+                                        <a href="<?= base_url('index.php/Kantin/tambah/') . $us['id']; ?>"class="btn btn-danger">Tambah</a>
+                                    </td>
+                                </tr>
+                                <?php $i++; ?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</main>

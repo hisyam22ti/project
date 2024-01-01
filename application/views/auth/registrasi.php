@@ -30,6 +30,11 @@
                                             <label for="nama">Nama</label>
                                         </div>
                                         <div class="form-floating mb-3">
+                                            <input class="form-control" id="hp" name="hp" value="<?= set_value('hp'); ?>" type="text" placeholder="No HP" />
+                                            <?= form_error('hp', '<small class="text_danger pl-3">','</small>'); ?>
+                                            <label for="hp">No HP</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
                                             <input class="form-control" id="email" name="email" value="<?= set_value('email'); ?>" type="email" placeholder="Email Address" />
                                             <?= form_error('email', '<small class="text_danger pl-3">','</small>'); ?>
                                             <label for="email">Email Address</label>

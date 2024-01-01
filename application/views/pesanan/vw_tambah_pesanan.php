@@ -6,7 +6,7 @@
         <div class="col md-8">
             <div class="card">
                 <div class="card-header justify-content-center">
-                    Form Tambah Data Pesanan
+                <?php echo $menu['nama']; ?>
                 </div>
                 <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
@@ -26,7 +26,7 @@
                             <?= form_error('meja', '<small class="text-danger pl-3">','</small>'); ?>
                         </div>
                         <div class="form-group mt-3">
-                            <a href="<?= base_url('index.php/') ?>Customer/pesanan" class="btn btn-danger">Tutup</a>
+                            <a href="<?= base_url('index.php/Customer/pilih/') . $menu['kantin']; ?>" class="btn btn-secondary">Kembali</a>
                             <button type="submit" name="tambah" class="btn btn-primary float-right">Tambah Pesanan</button>
                         </div>
                     </form>

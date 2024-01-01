@@ -14,12 +14,38 @@ class Menu_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
-    public function getById($id)
+    public function getKantin($id)
     {
         $this->db->from($this->table);
         $this->db->where('kantin', $id);
+        $this->db->order_by('nama', 'ASC');
         $query = $this->db->get();
         return $query->result_array();
+    }
+    public function getKantinMkn($id)
+    {
+        $this->db->from($this->table);
+        $this->db->where('kantin', $id);
+        $this->db->where('jenis = "Makanan"');
+        $this->db->order_by('nama', 'ASC');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function getKantinMnm($id)
+    {
+        $this->db->from($this->table);
+        $this->db->where('kantin', $id);
+        $this->db->where('jenis = "Minuman"');
+        $this->db->order_by('nama', 'ASC');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function getById($id)
+    {
+        $this->db->from($this->table);
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->row_array();
     }
     public function update($where, $data)
     {

@@ -22,12 +22,29 @@ class Pesanan_model extends CI_Model
         return $query->row_array();
     }
     public function getJoinKantin($id){
-        $this->db->select('m.nama AS menu_nama, p.deskripsi, p.porsi, p.harga, p.meja, k.nama AS kantin_nama, p.status, p.id');
+        $this->db->select('m.nama AS menu_nama, p.deskripsi, p.porsi, p.harga, p.meja, u.nama AS kantin_nama, p.status, p.id, p.menu, p.date_created, u.hp AS hp, u.email AS email');
         $this->db->from('pesanan p');
-        $this->db->join('kantin k', 'p.kantin = k.id', 'inner');
         $this->db->join('menu m', 'p.menu = m.id', 'inner');
+        $this->db->join('user u', 'm.kantin = u.id', 'inner');
         $this->db->where('p.customer', $id);
-        $this->db->order_by('p.status', 'ASC');
+        $this->db->where('p.status != "Sudah dibayar"');
+        $this->db->order_by('p.date_created', 'ASC');
+        $query = $this->db->get();
+        if (!$query) {
+            $error = $this->db->error();
+            echo 'Query error: '.$error['message'];
+            return false;
+        }
+        return $query->result_array();
+    }
+    public function getJoinKantinRiwayat($id){
+        $this->db->select('m.nama AS menu_nama, p.deskripsi, p.porsi, p.harga, p.meja, u.nama AS kantin_nama, p.status, p.id, p.menu, p.date_created, u.hp AS hp, u.email AS email');
+        $this->db->from('pesanan p');
+        $this->db->join('menu m', 'p.menu = m.id', 'inner');
+        $this->db->join('user u', 'm.kantin = u.id', 'inner');
+        $this->db->where('p.customer', $id);
+        $this->db->where('p.status = "Sudah dibayar"');
+        $this->db->order_by('p.date_created', 'DESC');
         $query = $this->db->get();
         if (!$query) {
             $error = $this->db->error();
@@ -37,12 +54,28 @@ class Pesanan_model extends CI_Model
         return $query->result_array();
     }
     public function getJoinCustomer($id){
-        $this->db->select('m.nama AS menu_nama, p.deskripsi, p.porsi, p.harga, p.meja, c.nama AS customer_nama, p.status, p.id');
+        $this->db->select('p.id, m.nama AS menu_nama, p.deskripsi, p.porsi, p.harga, p.meja, u.nama AS customer_nama, p.status, p.date_created, u.hp AS hp, u.email AS email');
         $this->db->from('pesanan p');
-        $this->db->join('customer c', 'p.customer = c.id', 'inner');
+        $this->db->join('user u', 'p.customer = u.id', 'inner');
         $this->db->join('menu m', 'p.menu = m.id', 'inner');
-        $this->db->where('kantin', $id);
-        $this->db->order_by('p.status', 'ASC');
+        $this->db->where('m.kantin', $id);
+        $this->db->where('p.status != "Sudah dibayar"');
+        $this->db->order_by('p.date_created', 'ASC');
+        $query = $this->db->get();if (!$query) {
+            $error = $this->db->error();
+            echo 'Query error: '.$error['message'];
+            return false;
+        }
+        return $query->result_array();
+    }
+    public function getJoinCustomerRiwayat($id){
+        $this->db->select('p.id, m.nama AS menu_nama, p.deskripsi, p.porsi, p.harga, p.meja, u.nama AS customer_nama, p.status, p.date_created, u.hp AS hp, u.email AS email');
+        $this->db->from('pesanan p');
+        $this->db->join('user u', 'p.customer = u.id', 'inner');
+        $this->db->join('menu m', 'p.menu = m.id', 'inner');
+        $this->db->where('m.kantin', $id);
+        $this->db->where('p.status = "Sudah dibayar"');
+        $this->db->order_by('p.date_created', 'DESC');
         $query = $this->db->get();if (!$query) {
             $error = $this->db->error();
             echo 'Query error: '.$error['message'];

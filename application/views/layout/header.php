@@ -21,17 +21,17 @@
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
+            <!-- <div class="input-group">
                 <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
                 <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div>
+            </div> -->
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['nama']; ?></span>
-                    <img class="img-profile rounded-circle" style="width: 20px;" src="<?= base_url('assets/assets/img/profile/') . $user['gambar']; ?>">
+                    <img class="img-profile" style="width: 20px;" src="<?= base_url('assets/assets/img/profile/') . $user['gambar']; ?>">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="#!">Settings</a></li>
@@ -58,73 +58,67 @@
                         <?php
                         if ($user['role'] == 'Admin') { ?>
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Mahasiswa/') ?>">
-                                    <i class="fas fa-fw fa-users"></i>
-                                    <span>Mahasiswa</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Prodi/') ?>">
-                                    <i class="fas fa-fw fa-users"></i>
-                                    <span>Prodi</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Calon_presiden/') ?>">
-                                    <i class="fas fa-fw fa-users"></i>
-                                    <span>Calon Presiden</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Caketum_pssi/') ?>">
-                                    <i class="fas fa-fw fa-users"></i>
-                                    <span>Calon Ketua Umum PSSI</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link collapsed" href="<?= site_url('Kantin/') ?>">
-                                    <i class="fas fa-fw fa-users"></i>
-                                    <span>Kantin</span>
+                                    <i class="fa-solid fa-store"></i>
+                                    <span class="ms-2">Kantin</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link collapsed" href="<?= site_url('Auth/logout/') ?>">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    <span class="ms-2">Logout</span>
                                 </a>
                             </li>
                         <?php } elseif ($user['role'] == 'Kantin') {
                         ?>
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Profil/') ?>">
-                                    <i class="fas fa-fw fa-users"></i>
-                                    <span>Profil</span>
+                                <a class="nav-link collapsed" href="<?= site_url('Kantin/pesanan') ?>">
+                                    <i class="fa-solid fa-clipboard"></i>
+                                    <span class="ms-2"">Pesanan</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link collapsed" href="<?= site_url('Menu/') ?>">
-                                    <i class="fas fa-fw fa-users"></i>
-                                    <span>Menu</span>
+                                    <i class="fa-solid fa-utensils"></i>
+                                    <span class="ms-2"">Menu</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link collapsed" href="<?= site_url('Kantin/detail') ?>">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span class="ms-2"">Profil</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link collapsed" href="<?= site_url('Auth/logout/') ?>">
-                                    <i class="fas fa-fw fa-users"></i>
-                                    <span>Logout</span>
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    <span class="ms-2"">Logout</span>
                                 </a>
                             </li>
                         <?php } else {
                             ?>
                             <li class="nav-item">
                                 <a class="nav-link collapsed" href="<?= site_url('Customer/') ?>">
-                                    <i class="fas fa-fw fa-users"></i>
-                                    <span>Kantin</span>
+                                    <i class="fa-solid fa-store"></i>
+                                    <span class="ms-2">Kantin</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Customer/pesanan/' . $user['id']) ?>">
-                                    <i class="fas fa-fw fa-users"></i>
-                                    <span>Pesanan</span>
+                                <a class="nav-link collapsed" href="<?= site_url('Customer/pesanan/')?>">
+                                    <i class="fa-solid fa-clipboard"></i>
+                                    <span class="ms-2">Pesanan</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link collapsed" href="<?= site_url('Customer/profil') ?>">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span class="ms-2">Profil</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link collapsed" href="<?= site_url('Auth/logout/') ?>">
-                                    <i class="fas fa-fw fa-users"></i>
-                                    <span>Logout</span>
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    <span class="ms-2">Logout</span>
                                 </a>
                             </li>
                         <?php }

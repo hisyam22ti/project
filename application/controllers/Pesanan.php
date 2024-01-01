@@ -6,7 +6,7 @@ class Pesanan extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Pesanan_model');
-        $this->load->model('Customer_model');
+        $this->load->model('User_model');
         $this->load->model('Menu_model');
     }
     public function index()
@@ -20,13 +20,11 @@ class Pesanan extends CI_Controller
     }
     public function tambah($menu)
     {
-        $data['judul'] = "Halaman Tambah Pesanan";
+        $data['judul'] = "Silahkan isi form pesanan";
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['customer'] = $this->db->get_where('customer', ['email' => $data['user']['email']])->row_array();
         $data['menu'] = $this->db->get_where('menu', ['id' => $menu])->row_array();
-        $this->form_validation->set_rules('deskripsi', 'Deskripsi Pesanan', 'required', [
-            'required' => 'Deskripsi Pesanan Wajib diisi'
-        ]);
+        $data['menu'] = $this->Menu_model->getById($menu);
+        $data['kantin'] = $this->db->get_where('menu', ['kantin' => $data['menu']['kantin']])->row_array();
         $this->form_validation->set_rules('porsi', 'Porsi Pesanan', 'required', [
             'required' => 'Porsi Pesanan Wajib diisi'
         ]);
@@ -44,7 +42,39 @@ class Pesanan extends CI_Controller
                 'porsi' => $this->input->post('porsi'),
                 'harga' => $this->input->post('porsi') * $data['menu']['harga'],
                 'meja' => $this->input->post('meja'),
-                'customer' => $data['customer']['id'],
+                'customer' => $data['user']['id'],
+                'status'=>'Belum diantar'
+            ];
+            $this->Pesanan_model->insert($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Pesanan Berhasil Ditambahkan!</div>');
+            redirect('Customer/pesanan');
+        }
+    }
+    public function riwayattambah($menu)
+    {
+        $data['judul'] = "Silahkan isi form pesanan";
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['menu'] = $this->db->get_where('menu', ['id' => $menu])->row_array();
+        $data['menu'] = $this->Menu_model->getById($menu);
+        $data['kantin'] = $this->db->get_where('menu', ['kantin' => $data['menu']['kantin']])->row_array();
+        $this->form_validation->set_rules('porsi', 'Porsi Pesanan', 'required', [
+            'required' => 'Porsi Pesanan Wajib diisi'
+        ]);
+        $this->form_validation->set_rules('meja', 'Meja Pesanan', 'required', [
+            'required' => 'Meja Pesanan Wajib diisi'
+        ]);
+        if ($this->form_validation->run() == false) {
+            $this->load->view("layout/header", $data);
+            $this->load->view("pesanan/vw_riwayat_tambah_pesanan", $data);
+            $this->load->view("layout/footer", $data);
+        } else {
+            $data = [
+                'menu' => $menu,
+                'deskripsi' => $this->input->post('deskripsi'),
+                'porsi' => $this->input->post('porsi'),
+                'harga' => $this->input->post('porsi') * $data['menu']['harga'],
+                'meja' => $this->input->post('meja'),
+                'customer' => $data['user']['id'],
                 'status'=>'Belum diantar'
             ];
             $this->Pesanan_model->insert($data);

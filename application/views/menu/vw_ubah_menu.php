@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <img src="<?= base_url('assets/assets/img/menu/') . $menu['gambar']; ?>" style="width: 100px;" class="img-thumbnail">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="gambar" id="gambar">
+                                 <input type="file" class="custom-file-input" name="gambar" id="gambar">
                                 <label for="gambar" class="custom-file-label">Choose File</label>
                                 <?= form_error('gambar', '<small class="text-danger pl-3">','</small>'); ?>
                             </div>
@@ -32,14 +32,8 @@
                                 id="harga" placeholder="Harga">
                             <?= form_error('harga', '<small class="text-danger pl-3">', '</small>'); ?>
                         </div>
-                        <div class="form-group">
-                            <label for="kantin">Kantin</label>
-                            <input type="text" name="kantin" value="<?= $menu['kantin']; ?>"
-                                class="form-control" id="kantin" placeholder="Kantin">
-                            <?= form_error('kantin', '<small class="text-danger pl-3">', '</small>'); ?>
-                        </div>
                         <div class="form-group mt-3">
-                            <a href="<?= base_url('index.php/') ?>Menu/" class="btn btn-danger">Tutup</a>
+                        <a href="<?= base_url('index.php/') ?>Menu/" class="btn btn-danger">Tutup</a>
                             <button type="submit" name="tambah" class="btn btn-primary float-right">Ubah
                                 Menu</button>
                         </div>

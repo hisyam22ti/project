@@ -4,7 +4,7 @@
             <?php echo $judul; ?>
         </h1>
         <div class="row">
-            <div class="col-md-12"><a href="<?= base_url('index.php/') ?>Kantin/tambah" class="btn btn-info mb-2">Tambah
+            <div class="col-md-12"><a href="<?= base_url('index.php/') ?>Kantin/customer" class="btn btn-info mb-2">Tambah
                     Kantin</a>
                 <div class="col-md-12">
                     <?= $this->session->flashdata('message'); ?>
@@ -15,7 +15,7 @@
                                 <td>Nama</td>
                                 <td>Email</td>
                                 <td>Gambar</td>
-                                <td>Action</td>
+                                <td>Aksi</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,10 +25,9 @@
                                     <td><?= $i; ?></td>
                                     <td><?= $us['nama']; ?></td>
                                     <td><?= $us['email']; ?></td>
-                                    <td><img src="<?= base_url('assets/assets/img/prodi/') . $us['gambar']; ?>" style="width: 100px;" class="img-thumbnail"></td>
+                                    <td><img src="<?= base_url('assets/assets/img/profile/') . $us['gambar']; ?>" style="width: 100px; height: 100px;" class="img-thumbnail"></td>
                                     <td>
                                         <a href="<?= base_url('index.php/Kantin/hapus/') . $us['id']; ?>"class="btn btn-danger">Hapus</a>
-                                        <a href="<?= base_url('index.php/Kantin/edit/') . $us['id']; ?>"class="btn btn-warning">Edit</a>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>

@@ -6,7 +6,6 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->model('User_model', 'userrole');
-        $this->load->model('Customer_model');
     }
 
     public function index()
@@ -35,6 +34,9 @@ class Auth extends CI_Controller
             redirect('User');
         }
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+        $this->form_validation->set_rules('hp', 'HP', 'required|integer|trim',[
+            'integer'=>'No HP harus angka'
+        ]);
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]',[
             'is_unique'=>'Email ini sudah terdaftar!',
             'valid_email'=>'Email Harus Valid',
@@ -58,12 +60,10 @@ class Auth extends CI_Controller
             $data=[
                 'nama'=>htmlspecialchars($this->input->post('nama', true)),
                 'email'=>htmlspecialchars($this->input->post('email', true)),
-                'gambar'=>'default.jpg',
-            ];
-            $this->Customer_model->insert($data);
-            $data+=[
+                'hp'=>htmlspecialchars($this->input->post('hp', true)),
+                'gambar'=>'def.jpg',
                 'password'=>password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'role'=>"User",
+                'role'=>"Customer",
             ];
             $this->userrole->insert($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat Akunmu telah berhasil terdaftar, Silahkan Login!</div>');
@@ -105,7 +105,7 @@ class Auth extends CI_Controller
                 } elseif($user['role'] == 'Kantin'){
                     redirect('Kantin/pesanan');
                 } else {
-                    redirect('Customer');
+                    redirect('Customer/pesanan');
                 }
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Salah!</div>');

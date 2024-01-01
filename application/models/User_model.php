@@ -11,14 +11,34 @@ class User_model extends CI_Model
     public function get()
     {
         $this->db->from($this->table);
-        $this->db->where('role', 'kantin');
         $query = $this->db->get();
         return $query->result_array();
     }
-    public function getBy()
+    public function getKantin()
+    {
+        $this->db->from($this->table);
+        $this->db->where('role', 'Kantin');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function getCustomer()
+    {
+        $this->db->from($this->table);
+        $this->db->where('role', 'Customer');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function getById()
     {
         $this->db->from($this->table);
         $this->db->where('email', $this->session->userdata('email'));
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+    public function getId($id)
+    {
+        $this->db->from($this->table);
+        $this->db->where('id', $id);
         $query = $this->db->get();
         return $query->row_array();
     }
