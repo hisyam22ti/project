@@ -23,7 +23,7 @@ class Customer extends CI_Controller
         $data['judul'] = "Silahkan Pilih Menu";
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['kantin'] = $this->User_model->getId($kantin);
-        $data['menu'] = $this->Menu_model->getKantin($kantin);
+        $data['menu'] = $this->Menu_model->getKantinC($kantin);
         $this->load->view("layout/header", $data);
         $this->load->view("customer/vw_menu_customer", $data);
         $this->load->view("layout/footer", $data);
@@ -33,7 +33,7 @@ class Customer extends CI_Controller
         $data['judul'] = "Silahkan Pilih Menu";
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['kantin'] = $this->User_model->getId($kantin);
-        $data['menu'] = $this->Menu_model->getKantinMkn($kantin);
+        $data['menu'] = $this->Menu_model->getKantinMknC($kantin);
         $this->load->view("layout/header", $data);
         $this->load->view("customer/vw_makan_customer", $data);
         $this->load->view("layout/footer", $data);
@@ -43,7 +43,7 @@ class Customer extends CI_Controller
         $data['judul'] = "Silahkan Pilih Menu";
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['kantin'] = $this->User_model->getId($kantin);
-        $data['menu'] = $this->Menu_model->getKantinMnm($kantin);
+        $data['menu'] = $this->Menu_model->getKantinMnmC($kantin);
         $this->load->view("layout/header", $data);
         $this->load->view("customer/vw_minum_customer", $data);
         $this->load->view("layout/footer", $data);

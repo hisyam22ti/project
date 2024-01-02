@@ -25,6 +25,11 @@ class Pesanan extends CI_Controller
         $data['menu'] = $this->db->get_where('menu', ['id' => $menu])->row_array();
         $data['menu'] = $this->Menu_model->getById($menu);
         $data['kantin'] = $this->db->get_where('menu', ['kantin' => $data['menu']['kantin']])->row_array();
+        $data['pesanan'] = $this->Pesanan_model->get();
+        $pesananModel = new Pesanan_model();
+        $estimasi = $pesananModel->getSumById($data['kantin']['id']);
+        var_dump($estimasi);
+        $estimasi += 5;
         $this->form_validation->set_rules('porsi', 'Porsi Pesanan', 'required', [
             'required' => 'Porsi Pesanan Wajib diisi'
         ]);
@@ -43,7 +48,8 @@ class Pesanan extends CI_Controller
                 'harga' => $this->input->post('porsi') * $data['menu']['harga'],
                 'meja' => $this->input->post('meja'),
                 'customer' => $data['user']['id'],
-                'status'=>'Belum diantar'
+                'estimasi' => $estimasi,
+                'status' => 'Belum diantar',
             ];
             $this->Pesanan_model->insert($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Pesanan Berhasil Ditambahkan!</div>');
@@ -75,7 +81,7 @@ class Pesanan extends CI_Controller
                 'harga' => $this->input->post('porsi') * $data['menu']['harga'],
                 'meja' => $this->input->post('meja'),
                 'customer' => $data['user']['id'],
-                'status'=>'Belum diantar'
+                'status' => 'Belum diantar'
             ];
             $this->Pesanan_model->insert($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Pesanan Berhasil Ditambahkan!</div>');
@@ -182,7 +188,7 @@ class Pesanan extends CI_Controller
                 'harga' => $data['pesanan']['harga'],
                 'meja' => $data['pesanan']['meja'],
                 'customer' => $data['pesanan']['customer'],
-                'status'=> 'Belum dibayar',
+                'status' => 'Belum dibayar',
             ];
             $this->Pesanan_model->update(['id' => $id], $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Pesanan Berhasil Diubah!</div>');
@@ -195,13 +201,12 @@ class Pesanan extends CI_Controller
                 'harga' => $data['pesanan']['harga'],
                 'meja' => $data['pesanan']['meja'],
                 'customer' => $data['pesanan']['customer'],
-                'status'=> 'Sudah dibayar',
+                'status' => 'Sudah dibayar',
             ];
             $this->Pesanan_model->update(['id' => $id], $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Pesanan Berhasil Diubah!</div>');
             redirect('Kantin/pesanan');
         } else {
-
         }
     }
 
@@ -221,4 +226,3 @@ class Pesanan extends CI_Controller
     //     redirect('Pesanan');
     // }
 }
-?>

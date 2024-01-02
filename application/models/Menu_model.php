@@ -40,6 +40,35 @@ class Menu_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+    public function getKantinC($id)
+    {
+        $this->db->from($this->table);
+        $this->db->where('kantin', $id);
+        $this->db->where('status = "Tersedia"');
+        $this->db->order_by('nama', 'ASC');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function getKantinMknC($id)
+    {
+        $this->db->from($this->table);
+        $this->db->where('kantin', $id);
+        $this->db->where('status = "Tersedia"');
+        $this->db->where('jenis = "Makanan"');
+        $this->db->order_by('nama', 'ASC');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    public function getKantinMnmC($id)
+    {
+        $this->db->from($this->table);
+        $this->db->where('kantin', $id);
+        $this->db->where('status = "Tersedia"');
+        $this->db->where('jenis = "Minuman"');
+        $this->db->order_by('nama', 'ASC');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
     public function getById($id)
     {
         $this->db->from($this->table);

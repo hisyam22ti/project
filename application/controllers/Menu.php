@@ -60,6 +60,7 @@ class Menu extends CI_Controller
                 'jenis' => $this->input->post('jenis'),
                 'harga' => $this->input->post('harga'),
                 'kantin' => $data['user']['id'],
+                'status' => "Tersedia",
             ];
             $upload_image = $_FILES['gambar']['name'];
             if ($upload_image) {
@@ -95,7 +96,37 @@ class Menu extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Menu Berhasil Dihapus!</div>');
         redirect('Menu');
     }
+    public function ubahstatus($id)
+    {
+        $data['judul'] = "Halaman Ubah Status";
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['menu'] = $this->Menu_model->getById($id);
+        if ($data['menu']['status'] == 'Tersedia') {
+            $data = [
+                'nama' => $data['menu']['nama'],
+                'jenis' => $data['menu']['jenis'],
+                'harga' => $data['menu']['harga'],
+                'kantin' => $data['menu']['kantin'],
+                'status'=> 'Tidak Tersedia',
+            ];
+            $this->Menu_model->update(['id' => $id], $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Menu Berhasil Diubah!</div>');
+            redirect('Menu');
+        } elseif ($data['menu']['status'] == 'Tidak Tersedia') {
+            $data = [
+                'nama' => $data['menu']['nama'],
+                'jenis' => $data['menu']['jenis'],
+                'harga' => $data['menu']['harga'],
+                'kantin' => $data['menu']['kantin'],
+                'status'=> 'Tersedia',
+            ];
+            $this->Menu_model->update(['id' => $id], $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Menu Berhasil Diubah!</div>');
+            redirect('Menu');
+        } else {
 
+        }
+    }
     // function upload()
     // {
     //     $data = [

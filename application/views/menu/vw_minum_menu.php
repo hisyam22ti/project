@@ -18,6 +18,7 @@
                                 <td>Nama Menu</td>
                                 <td>Gambar</td>
                                 <td>Harga</td>
+                                <td>Status</td>
                                 <td>Aksi</td>
                             </tr>
                         </thead>
@@ -29,6 +30,13 @@
                                     <td><?= $us['nama']; ?></td>
                                     <td><img src="<?= base_url('assets/assets/img/menu/') . $us['gambar']; ?>" style="width: 100px; height: 100px;" class="img-thumbnail"></td>
                                     <td><?= $us['harga']; ?></td>
+                                    <td>
+                                        <?php if ($us['status'] == "Tersedia") { ?>
+                                        <a href="<?= base_url('index.php/Menu/ubahstatus/') . $us['id']; ?>" class="btn btn-success"><?= $us['status']; ?></a>
+                                        <?php } elseif ($us['status'] == 'Tidak Tersedia') {?>
+                                        <a href="<?= base_url('index.php/Menu/ubahstatus/') . $us['id']; ?>" class="btn btn-secondary"><?= $us['status']; ?></a>
+                                        <?php } ?>
+                                    </td>
                                     <td>
                                         <a href="<?= base_url('index.php/Menu/edit/') . $us['id']; ?>" class="btn btn-warning">Edit</a>
                                         <!-- Button trigger modal -->
