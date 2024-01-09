@@ -57,6 +57,7 @@
                                                             <br>Meja: <?= $us['meja']; ?>
                                                             <br>Status: <?= $us['status']; ?>
                                                             <br>Waktu: <?= $us['date_created']; ?>
+                                                            <br>Estimasi: <?= $us['estimasi']; ?> Menit
                                                             <br><br><b>Customer:</b>
                                                             <br>Nama: <?= $us['customer_nama']; ?>
                                                             <br>NO HP: <?= $us['hp']; ?>

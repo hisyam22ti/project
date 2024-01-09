@@ -13,14 +13,14 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+<body class="sb-nav-fixed" style="background-color: lightyellow;">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-success">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="">Kantin PCR</a>
+        <a class="navbar-brand ps-3" href="" style="color: yellow;">Kantin PCR</a>
         <!-- Sidebar Toggle-->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" style="color: yellow;" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" style="color: yellow;">
             <!-- <div class="input-group">
                 <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
                 <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
@@ -29,7 +29,7 @@
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:yellow;">
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['nama']; ?></span>
                     <img class="img-profile" style="width: 20px;" src="<?= base_url('assets/assets/img/profile/') . $user['gambar']; ?>">
                 </a>
@@ -46,25 +46,20 @@
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
+            <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
+                <div class="sb-sidenav-menu" style="background-color: yellow;">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
-                        </a>
-                        <div class="sb-sidenav-menu-heading">Menu</div>
+                        <div class="sb-sidenav-menu-heading" style="color: green;">Menu</div>
                         <?php
                         if ($user['role'] == 'Admin') { ?>
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Kantin/') ?>">
+                                <a class="nav-link collapsed" style="color: green;" href="<?= site_url('Kantin/') ?>">
                                     <i class="fa-solid fa-store"></i>
                                     <span class="ms-2">Kantin</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Auth/logout/') ?>">
+                                <a class="nav-link collapsed" style="color: green;" href="<?= site_url('Auth/logout/') ?>">
                                     <i class="fa-solid fa-right-from-bracket"></i>
                                     <span class="ms-2">Logout</span>
                                 </a>
@@ -72,25 +67,25 @@
                         <?php } elseif ($user['role'] == 'Kantin') {
                         ?>
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Kantin/pesanan') ?>">
+                                <a class="nav-link collapsed" style="color: green;" href="<?= site_url('Kantin/pesanan') ?>">
                                     <i class="fa-solid fa-clipboard"></i>
                                     <span class="ms-2"">Pesanan</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Menu/') ?>">
+                                <a class="nav-link collapsed" style="color: green;" href="<?= site_url('Menu/') ?>">
                                     <i class="fa-solid fa-utensils"></i>
                                     <span class="ms-2"">Menu</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Kantin/detail') ?>">
+                                <a class="nav-link collapsed" style="color: green;" href="<?= site_url('Kantin/detail') ?>">
                                     <i class="fa-solid fa-user"></i>
                                     <span class="ms-2"">Profil</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Auth/logout/') ?>">
+                                <a class="nav-link collapsed" style="color: green;" href="<?= site_url('Auth/logout/') ?>">
                                     <i class="fa-solid fa-right-from-bracket"></i>
                                     <span class="ms-2"">Logout</span>
                                 </a>
@@ -98,25 +93,25 @@
                         <?php } else {
                             ?>
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Customer/') ?>">
+                                <a class="nav-link collapsed" style="color: green;" href="<?= site_url('Customer/') ?>">
                                     <i class="fa-solid fa-store"></i>
                                     <span class="ms-2">Kantin</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Customer/pesanan/')?>">
+                                <a class="nav-link collapsed" style="color: green;" href="<?= site_url('Customer/pesanan/')?>">
                                     <i class="fa-solid fa-clipboard"></i>
                                     <span class="ms-2">Pesanan</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Customer/profil') ?>">
+                                <a class="nav-link collapsed" style="color: green;" href="<?= site_url('Customer/profil') ?>">
                                     <i class="fa-solid fa-user"></i>
                                     <span class="ms-2">Profil</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= site_url('Auth/logout/') ?>">
+                                <a class="nav-link collapsed" style="color: green;" href="<?= site_url('Auth/logout/') ?>">
                                     <i class="fa-solid fa-right-from-bracket"></i>
                                     <span class="ms-2">Logout</span>
                                 </a>

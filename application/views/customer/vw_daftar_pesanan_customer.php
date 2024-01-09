@@ -4,7 +4,8 @@
             <?php echo $judul; ?>
         </h1>
         <div class="row">
-            <div class="col-md-12"><a href="<?= base_url('index.php/') ?>Customer/riwayat" class="btn btn-info mb-2">Riwayat Pesanan</a>
+            <div class="col-md-12"><a href="<?= base_url('index.php/') ?>Customer/" class="btn btn-info mb-2">Tambah Pesanan</a>
+            <a href="<?= base_url('index.php/') ?>Customer/riwayat" class="btn btn-info mb-2">Riwayat Pesanan</a>
                 <div class="col-md-12">
                     <?= $this->session->flashdata('message'); ?>
                     <table class="table">
@@ -17,6 +18,7 @@
                                 <td>Harga</td>
                                 <td>Kantin</td>
                                 <td>Status</td>
+                                <td>Estimasi</td>
                                 <td>Aksi</td>
                             </tr>
                         </thead>
@@ -32,6 +34,7 @@
                                         <td><?= $us['harga']; ?></td>
                                         <td><?= $us['kantin_nama']; ?></td>
                                         <td><span class="badge text-bg-warning mb-3"><?= $us['status']; ?></span><br></td>
+                                        <td><?= $us['estimasi']; ?> Menit</td>
                                         <td>
                                             <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#detail<?= $us['id']; ?>">
                                                 Detail
@@ -54,6 +57,7 @@
                                                             <br>Meja: <?= $us['meja']; ?>
                                                             <br>Status: <?= $us['status']; ?>
                                                             <br>Waktu: <?= $us['date_created']; ?>
+                                                            <br>Estimasi: <?= $us['estimasi']; ?> Menit
                                                             <br><br><b>Kantin:</b>
                                                             <br>Nama: <?= $us['kantin_nama']; ?>
                                                             <br>NO HP: <?= $us['hp']; ?>

@@ -14,9 +14,9 @@ class Customer extends CI_Controller
         $data['judul'] = "Silahkan Pilih Kantin";
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['kantin'] = $this->User_model->getKantin(); 
-        $this->load->view("layout/header", $data);
+        $this->load->view("layout/header_customer", $data);
         $this->load->view("customer/vw_customer", $data);
-        $this->load->view("layout/footer");
+        $this->load->view("layout/footer_customer");
     }
     public function pilih($kantin)
     {
@@ -24,9 +24,9 @@ class Customer extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['kantin'] = $this->User_model->getId($kantin);
         $data['menu'] = $this->Menu_model->getKantinC($kantin);
-        $this->load->view("layout/header", $data);
+        $this->load->view("layout/header_customer", $data);
         $this->load->view("customer/vw_menu_customer", $data);
-        $this->load->view("layout/footer", $data);
+        $this->load->view("layout/footer_customer", $data);
     }
     public function makan($kantin)
     {
@@ -34,9 +34,9 @@ class Customer extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['kantin'] = $this->User_model->getId($kantin);
         $data['menu'] = $this->Menu_model->getKantinMknC($kantin);
-        $this->load->view("layout/header", $data);
+        $this->load->view("layout/header_customer", $data);
         $this->load->view("customer/vw_makan_customer", $data);
-        $this->load->view("layout/footer", $data);
+        $this->load->view("layout/footer_customer", $data);
     }
     public function minum($kantin)
     {
@@ -44,36 +44,36 @@ class Customer extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['kantin'] = $this->User_model->getId($kantin);
         $data['menu'] = $this->Menu_model->getKantinMnmC($kantin);
-        $this->load->view("layout/header", $data);
+        $this->load->view("layout/header_customer", $data);
         $this->load->view("customer/vw_minum_customer", $data);
-        $this->load->view("layout/footer", $data);
+        $this->load->view("layout/footer_customer", $data);
     }
     public function pesanan()
     {
         $data['judul'] = "Halaman Pesanan";
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['pesanan'] = $this->Pesanan_model->getJoinKantin($data['user']['id']);
-        $this->load->view("layout/header", $data);
+        $this->load->view("layout/header_customer", $data);
         $this->load->view("customer/vw_daftar_pesanan_customer", $data);
-        $this->load->view("layout/footer", $data);
+        $this->load->view("layout/footer_customer", $data);
     }
     public function riwayat()
     {
         $data['judul'] = "Halaman Pesanan";
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['pesanan'] = $this->Pesanan_model->getJoinKantinRiwayat($data['user']['id']);
-        $this->load->view("layout/header", $data);
+        $this->load->view("layout/header_customer", $data);
         $this->load->view("customer/vw_riwayat_customer", $data);
-        $this->load->view("layout/footer", $data);
+        $this->load->view("layout/footer_customer", $data);
     }
     public function profil()
     {
         $data['judul'] = "Halaman Profil";
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['customer'] = $this->User_model->getById($data['user']['id']);
-        $this->load->view("layout/header", $data);
+        $this->load->view("layout/header_customer", $data);
         $this->load->view("customer/vw_profil_customer", $data);
-        $this->load->view("layout/footer");
+        $this->load->view("layout/footer_customer");
     }
     public function edit()
     {
@@ -84,9 +84,9 @@ class Customer extends CI_Controller
             'required'=>'Nama Customer Wajib diisi'
         ]);
         if($this->form_validation->run()==false){
-            $this->load->view("layout/header", $data);
+            $this->load->view("layout/header_customer", $data);
             $this->load->view("customer/vw_ubah_customer", $data);
-            $this->load->view("layout/footer", $data);
+            $this->load->view("layout/footer_customer", $data);
         } else{
             $data = [
                 'nama' => $this->input->post('nama'),

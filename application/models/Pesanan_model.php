@@ -23,20 +23,19 @@ class Pesanan_model extends CI_Model
     }
     public function getSumById($id)
     {
-        $this->db->select('COALESCE(SUM(p.estimasi), 0) as estimasi');
+        $this->db->select('Count(estimasi) as estimasi');
         $this->db->from('pesanan p');
         $this->db->join('menu m', 'p.menu = m.id', 'inner');
-        $this->db->join('user u', 'm.kantin = u.id', 'inner');
         $this->db->where('m.kantin', $id);
         $this->db->where('p.status = "Belum diantar"');
         $query = $this->db->get();
         $result = $query->row_array();
-        return $result['estimasi'];
+        return $result;
     }
 
     public function getJoinKantin($id)
     {
-        $this->db->select('m.nama AS menu_nama, p.deskripsi, p.porsi, p.harga, p.meja, u.nama AS kantin_nama, p.status, p.id, p.menu, p.date_created, u.hp AS hp, u.email AS email');
+        $this->db->select('m.nama AS menu_nama, p.deskripsi, p.porsi, p.harga, p.meja, u.nama AS kantin_nama, p.status, p.id, p.menu, p.date_created, u.hp AS hp, u.email AS email, p.estimasi');
         $this->db->from('pesanan p');
         $this->db->join('menu m', 'p.menu = m.id', 'inner');
         $this->db->join('user u', 'm.kantin = u.id', 'inner');
@@ -53,7 +52,7 @@ class Pesanan_model extends CI_Model
     }
     public function getJoinKantinRiwayat($id)
     {
-        $this->db->select('m.nama AS menu_nama, p.deskripsi, p.porsi, p.harga, p.meja, u.nama AS kantin_nama, p.status, p.id, p.menu, p.date_created, u.hp AS hp, u.email AS email');
+        $this->db->select('m.nama AS menu_nama, p.deskripsi, p.porsi, p.harga, p.meja, u.nama AS kantin_nama, p.status, p.id, p.menu, p.date_created, u.hp AS hp, u.email AS email, p.estimasi');
         $this->db->from('pesanan p');
         $this->db->join('menu m', 'p.menu = m.id', 'inner');
         $this->db->join('user u', 'm.kantin = u.id', 'inner');
@@ -70,7 +69,7 @@ class Pesanan_model extends CI_Model
     }
     public function getJoinCustomer($id)
     {
-        $this->db->select('p.id, m.nama AS menu_nama, p.deskripsi, p.porsi, p.harga, p.meja, u.nama AS customer_nama, p.status, p.date_created, u.hp AS hp, u.email AS email');
+        $this->db->select('p.id, m.nama AS menu_nama, p.deskripsi, p.porsi, p.harga, p.meja, u.nama AS customer_nama, p.status, p.date_created, u.hp AS hp, u.email AS email, p.estimasi');
         $this->db->from('pesanan p');
         $this->db->join('user u', 'p.customer = u.id', 'inner');
         $this->db->join('menu m', 'p.menu = m.id', 'inner');
@@ -87,7 +86,7 @@ class Pesanan_model extends CI_Model
     }
     public function getJoinCustomerRiwayat($id)
     {
-        $this->db->select('p.id, m.nama AS menu_nama, p.deskripsi, p.porsi, p.harga, p.meja, u.nama AS customer_nama, p.status, p.date_created, u.hp AS hp, u.email AS email');
+        $this->db->select('p.id, m.nama AS menu_nama, p.deskripsi, p.porsi, p.harga, p.meja, u.nama AS customer_nama, p.status, p.date_created, u.hp AS hp, u.email AS email, p.estimasi');
         $this->db->from('pesanan p');
         $this->db->join('user u', 'p.customer = u.id', 'inner');
         $this->db->join('menu m', 'p.menu = m.id', 'inner');

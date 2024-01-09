@@ -25,11 +25,8 @@ class Pesanan extends CI_Controller
         $data['menu'] = $this->db->get_where('menu', ['id' => $menu])->row_array();
         $data['menu'] = $this->Menu_model->getById($menu);
         $data['kantin'] = $this->db->get_where('menu', ['kantin' => $data['menu']['kantin']])->row_array();
-        $data['pesanan'] = $this->Pesanan_model->get();
-        $pesananModel = new Pesanan_model();
-        $estimasi = $pesananModel->getSumById($data['kantin']['id']);
-        var_dump($estimasi);
-        $estimasi += 5;
+        $data['pesanan'] = $this->Pesanan_model->getSumById($data['menu']['kantin']);
+        $estimasi = ($data['pesanan']['estimasi'] + 1) * 5;
         $this->form_validation->set_rules('porsi', 'Porsi Pesanan', 'required', [
             'required' => 'Porsi Pesanan Wajib diisi'
         ]);
@@ -37,9 +34,9 @@ class Pesanan extends CI_Controller
             'required' => 'Meja Pesanan Wajib diisi'
         ]);
         if ($this->form_validation->run() == false) {
-            $this->load->view("layout/header", $data);
+            $this->load->view("layout/header_customer", $data);
             $this->load->view("pesanan/vw_tambah_pesanan", $data);
-            $this->load->view("layout/footer", $data);
+            $this->load->view("layout/footer_customer", $data);
         } else {
             $data = [
                 'menu' => $menu,
@@ -70,9 +67,9 @@ class Pesanan extends CI_Controller
             'required' => 'Meja Pesanan Wajib diisi'
         ]);
         if ($this->form_validation->run() == false) {
-            $this->load->view("layout/header", $data);
+            $this->load->view("layout/header_customer", $data);
             $this->load->view("pesanan/vw_riwayat_tambah_pesanan", $data);
-            $this->load->view("layout/footer", $data);
+            $this->load->view("layout/footer_customer", $data);
         } else {
             $data = [
                 'menu' => $menu,
